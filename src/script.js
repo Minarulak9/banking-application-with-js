@@ -139,11 +139,11 @@ const showMsg = (msg, color) => {
     msgElem.classList.remove('msg_active');
   }, 3500);
 }
-const displayMovements = (acc) => {
+const displayMovements = (movement) => {
   containerMovements.innerHTML = ''
-  acc.movements.forEach((mov, i) => {
+  movement.forEach((mov, i) => {
     let movType = mov > 0 ? 'deposit' : 'withdrawal';
-    let date = new Date(acc.movementsDates[i]);
+    let date = new Date(currentAccount.movementsDates[i]);
     let now = new Date();
     let yearD = now.getFullYear() - date.getFullYear();
     let monthD = now.getMonth() - date.getMonth();
@@ -188,7 +188,7 @@ const calcDisplaySummary = (acc) => {
   labelSumInterest.textContent = interest.toFixed(2) + '  '
 }
 const updateUI = () => {
-  displayMovements(currentAccount);
+  displayMovements(currentAccount.movements);
   calcDisplaySummary(currentAccount);
   printTottal(currentAccount.movements)
 }
