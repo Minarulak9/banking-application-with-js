@@ -338,6 +338,7 @@ btnClose.addEventListener('click', (e) => {
       showMsg('please enter correct details')
     }
   }
+  updateLoginDetails()
 })
 //===========================================================/
 //============================Loan===========================/
@@ -372,10 +373,14 @@ btnLoan.addEventListener('click', (e) => {
 
 //===========================================================/
 // login details..
-accounts.forEach(acc => {
-  let html = `${acc.userName} ==> ${acc.pin}<br>`
-  userDetails.insertAdjacentHTML('beforeend', html)
-})
+function updateLoginDetails() {
+  userDetails.innerHTML = "";
+  accounts.forEach(acc => {
+    let html = `${acc.userName} ==> ${acc.pin}<br>`;
+    userDetails.insertAdjacentHTML('beforeend', html);
+  })
+}
+updateLoginDetails()
 btnDetails.addEventListener('click', () => {
   userDetails.classList.toggle('details_active')
 })
@@ -396,14 +401,11 @@ const createNewAccount = () => {
     pin: +userpin,
     interestRate: userrate,
     movements: [],
-    movementsDates:[]
+    movementsDates:[],
+    userName:username.split(' ').map(name=>name[0]).join('')
   })
   userDetails.innerHTML = '';
-  accounts.forEach(acc => {
-    acc.userName = computeUserName(acc.owner)
-    let html = `${acc.userName} ==> ${acc.pin}<br>`
-    userDetails.insertAdjacentHTML('beforeend', html)
-  })
+  updateLoginDetails()
   newName.value = newPin.value = newIntresRate.value = ''
   accountForm.classList.remove('account-form-active');
   overlay.classList.remove('overlay-add')
