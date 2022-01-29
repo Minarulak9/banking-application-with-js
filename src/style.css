@@ -61,12 +61,13 @@ nav {
   cursor: pointer;
 }
 .overlay{
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 10000000;
   background:black;
   opacity:.7;
+  height: 100vh !important;
   display:none;
 }
 .overlay-add{
@@ -78,7 +79,8 @@ nav {
   left: 50%;
   transform:translate(-50%,-50%);
   width:0;
-  height:0;
+  height: 0;
+  min-height:0;
   overflow:hidden;
   background:#f3f3f3;
   border-radius: 10px;
@@ -93,13 +95,16 @@ nav {
 }
 .account-form-active{
   width:50%;
-  height:45vh;
+  min-height:45vh;
   padding:10px;
+  height: initial;
 }
 .form_close-btn{
-  float: right;
+  position: absolute;
+  top: 0;
+  right:0;
   font-size: 2rem;
-  padding:0 15px 15px 0;
+  padding:5px ;
   cursor: pointer;
 }
 .new-acc-form{
@@ -138,6 +143,15 @@ nav {
   outline: none;
   border: 1px solid #ccc;
 }
+.input-row input[type="number"]::-webkit-outer-spin-button,
+.input-row input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 .create-account-btn{
   border: none;
   outline: none;
@@ -149,7 +163,7 @@ nav {
   box-shadow: 5px 5px 14px -10px;
   width:200px;
   display: block;
-  margin: 50px auto 10px auto;
+  margin: 40px auto 10px auto;
   cursor: pointer;
   transition:.3s;
 }
@@ -498,7 +512,7 @@ h2 {
   }
   .account-form-active{
   width:95%;
-  height:40vh;
+  min-height:40vh;
   padding:10px;
 }
 }

@@ -91,6 +91,7 @@ const btnCreateAcc = document.querySelector('.create-account-btn');
 const newName = document.querySelector('#name');
 const newPin = document.querySelector('#pin');
 const newIntresRate = document.querySelector('#rate');
+const openingBalance = document.querySelector('#balance');
 
 const labelDate = document.querySelector('.date');
 const labelBalance = document.querySelector('.balance__value');
@@ -393,15 +394,16 @@ overlay.style.width = '100%';
 // Open new account
 let openWindow = false;
 const createNewAccount = () => {
-  let username = newName.value;
+  let username = newName.value.toLowerCase().split(" ").map(l=>l[0].toUpperCase()+l.slice(1,l.length)).join(" ");
   let userpin = newPin.value;
   let userrate = newIntresRate.value;
+  let newAccBalance = openingBalance.value;
   accounts.push({
     owner: username,
     pin: +userpin,
     interestRate: userrate,
-    movements: [],
-    movementsDates:[],
+    movements: [+newAccBalance],
+    movementsDates:[new Date().toISOString()],
     userName:username.split(' ').map(name=>name[0]).join('')
   })
   userDetails.innerHTML = '';
@@ -418,6 +420,11 @@ btnOpenAcc.addEventListener('click', (e) => {
   newName.focus()
   openWindow = true;
 })
+overlay.addEventListener("click",()=>{
+  accountForm.classList.remove('account-form-active')
+  overlay.classList.remove('overlay-add')
+  openWindow = false
+})
 btnAccCose.addEventListener('click', (e) => {
   e.preventDefault()
   accountForm.classList.remove('account-form-active')
@@ -426,13 +433,14 @@ btnAccCose.addEventListener('click', (e) => {
 })
 btnCreateAcc.addEventListener('click', (e) => {
   e.preventDefault();
-  let name = newName.value;
+  let name = newName.value.trim();
   let pin = newPin.value;
   let rate = newIntresRate.value;
+  let balance = openingBalance.value;
   if (name && pin && rate) {
     if (String(pin).length == 4) {
       for (let i = 0; i < accounts.length; i++) {
-        if (name == accounts[0].owner) {
+        if (name == accounts[i].owner) {
           showMsg('The user is allrady regesterd', '#39b385 ')
           return;
         }

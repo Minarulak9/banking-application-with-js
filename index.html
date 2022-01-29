@@ -24,8 +24,10 @@
     <audio src="./src/warn.mp3" class='warnig'></audio>
     <audio src="./src/pay.mp3" class='money-sent'></audio>
     <nav>
-      <p class="welcome">Log in to get started</p>
-      <img src="./src/logo.png" alt="Logo" class="logo" />
+      <div id="logo">
+        <img src="./src/logo.png" alt="Logo" class="logo" />
+        <p class="welcome">Log in to get started</p>
+      </div>
       <form class="login">
         <button class="open-account" type='button'>Open new account</button>
         <input
@@ -45,7 +47,7 @@
     </nav>
     <div class="overlay"></div>
     <div class="account-form">
-      <div class="form_close-btn">❌</div>
+      <div class="form_close-btn"><img src="./src/cross.png" width="30" height="30" alt="close"></div>
       <form class="new-acc-form" >
         <div class="input-row">
           <label for="name">Full Name  </label>
@@ -58,6 +60,10 @@
         <div class="input-row">
           <label for="rate">Interest rate (%) </label>
           <input type="text" name="rate" id="rate" placeholder="1.5">
+        </div>
+        <div class="input-row">
+          <label for="opening-balance">Opening balance</label>
+          <input type="number" name="opening-balance" id="balance" placeholder="1000">
         </div>
         <button class="create-account-btn">Create account</button>
       </form>
